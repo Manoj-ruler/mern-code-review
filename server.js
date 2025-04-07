@@ -11,13 +11,13 @@ const app = express();
 // ======================
 // Middleware Configuration
 // ======================
-const cors = require('cors');
 const allowedOrigins = [process.env.FRONTEND_URL];
 
 app.use(cors({
   origin: allowedOrigins,
   credentials: true
 }));
+console.log("Allowed Origin:", process.env.FRONTEND_URL);
 
 app.use(express.json());
 
