@@ -237,12 +237,12 @@ app.get('/api/code/random', authenticate, async (req, res) => {
   }
 });
 
-// View Submitted Codes with Feedback (Protected)
 app.get('/api/code/my-submissions', authenticate, async (req, res) => {
   try {
     const snippets = await CodeSnippet.find({ userId: req.user._id }).lean();
     const snippetIds = snippets.map(snippet => snippet._id);
-
+    console.log(snippetIds);
+    console.log(snippets);
     const feedbacks = await Feedback.find({ codeSnippetId: { $in: snippetIds } })
       .populate('reviewerId', 'email')
       .lean();
@@ -280,7 +280,7 @@ app.post('/api/feedback', authenticate, async (req, res) => {
     const feedback = await Feedback.create({
       codeSnippetId,
       reviewerId: req.user._id,
-      feedbackText
+      feedbackText,
     });
 
     res.status(201).json(feedback);
@@ -289,6 +289,7 @@ app.post('/api/feedback', authenticate, async (req, res) => {
     res.status(500).json({ message: 'Failed to submit feedback' });
   }
 });
+
 
 // Protected Test Route
 app.get('/api/protected', authenticate, (req, res) => {
