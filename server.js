@@ -312,7 +312,7 @@ app.use((req, res) => {
 // ======================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+  console.log(`\n🚀 Server running on https://mern-code-review.onrender.com:${PORT}`);
   console.log('Available endpoints:');
   console.log('- POST /api/auth/register');
   console.log('- POST /api/auth/login');
